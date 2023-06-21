@@ -3,10 +3,23 @@ const ARENA_HEIGHT = 30;
 const FOOD = 'F';
 const SNAKE = '*';
 
-const container = document.body.appendChild(document.createElement('div'));
-container.style.border = '1px #000 solid';
-container.style.width = 'fit-content';
-container.style.position = 'relative';
+// TODO: cais
+
+const absWrapper = document.createElement('div');
+absWrapper.style = {
+	position: "absolute",
+	width: "100%",
+	height: "100%",
+	background: "#ffffff"
+};
+
+const container = absWrapper.appendChild(document.createElement('div'));
+container.style = {
+	border: "1px #000 solid",
+	width: "fit-content",
+	position: "absolute",
+	transform: "translate(50%, 50%)"
+}
 
 const pre = container.appendChild(document.createElement('pre'));
 pre.style.borderBottom = '1px #000 solid';
