@@ -4,6 +4,7 @@ const FOOD = 'F';
 const SNAKE = '*';
 
 // TODO: cais
+// test comment
 
 const absWrapper = document.createElement('div');
 absWrapper.style = {
