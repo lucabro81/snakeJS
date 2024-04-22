@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>SnakeJS</title>
-	<script defer src="snake.js"></script>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SnakeJS</title>
+    <script defer src="./src/app.js" type="module"></script>
+  </head>
+  <body>
+    <div
+      style="
+        border: 1px #000 solid;
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      "
+    >
+      <pre
+        id="movement-area"
+        style="border-bottom: 1px #000 solid; width: fit-content"
+      ></pre>
+      <p>Score: <span id="score"></span></p>
+    </div>
+    <div
+      id="gameover"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      "
+    >
+      GAME OVER
+    </div>
+  </body>
 </html>
