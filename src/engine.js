@@ -1,4 +1,10 @@
-import { ARENA_HEIGHT, ARENA_WIDTH, FOOD, SNAKE_BODY } from "./const.js";
+import {
+  ARENA_HEIGHT,
+  ARENA_WIDTH,
+  FOOD,
+  SNAKE_BODY,
+  TAIL_DIRECTION,
+} from "./const.js";
 import { getRandomInt } from "./utils.js";
 
 let arenaElement = null;
@@ -210,24 +216,7 @@ function initArenaMatrix() {
 
 function initialPosition() {
   const startPosition = randomPosition();
-  // console.log("startPosition", startPosition, arenaMatrix);
   const curr = arenaMatrix.writeAtPosition(startPosition, SNAKE_BODY);
-
-  // let curr = arenaMatrix;
-
-  // let i = 0;
-  // let j = 0;
-
-  // while (j < startPosition[0]) {
-  //   curr = curr.next;
-  //   j++;
-  // }
-
-  // while (i < startPosition[1]) {
-  //   curr = curr.lower;
-  //   i++;
-  // }
-
   curr.data = "*";
   snake.head = curr;
   snake.tail = curr;
@@ -236,49 +225,26 @@ function initialPosition() {
 
 function spawnFood() {
   const foodPosition = randomPosition();
-  // console.log("foodPosition", foodPosition, arenaMatrix.prev);
   arenaMatrix.writeAtPosition(foodPosition, FOOD);
-  // let food = arenaMatrix;
-  // console.log("foodPosition", foodPosition);
-
-  // let i = 0;
-  // let j = 0;
-
-  // while (j < foodPosition[0]) {
-  //   food.data = "g";
-  //   food = food.next;
-  //   j++;
-  // }
-
-  // while (i < foodPosition[1]) {
-  //   food.data = "g";
-  //   food = food.lower;
-  //   i++;
-  // }
-
-  // food.data = FOOD;
-  // snake.segments++;
-  // segments++;
   snake.segments++;
   return arenaMatrix;
 }
 
 function directionManagement(headFutureNode) {
-  snake.newHead(headFutureNode);
-
   if (headFutureNode.isSnake()) {
     stopped = true;
-    gameoverElement.style.display = "block"; // TODO: dispatch event
+    gameoverElement.style.display = "flex"; // TODO: dispatch event
     return;
   }
 
   if (!headFutureNode.isFood()) {
+    snake.newHead(headFutureNode);
     snake.newTail();
     snake.scoreNumber += 1;
   } else {
-    shift = false;
     snake.scoreNumber += 10;
     spawnFood();
+    snake.newHead(headFutureNode);
   }
 }
 
@@ -320,6 +286,7 @@ function isValidDirection(selectedDir) {
 }
 
 function onKeyUp(evt) {
+  evt.stopPropagation();
   if (isValidDirection(evt.code)) {
     snake.currDirection = evt.code;
     clearInterval(loopTimer);
